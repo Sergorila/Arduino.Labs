@@ -1,22 +1,16 @@
 long* micrs = new long[6];
-long* times = new long[6];
+long times[6] = {50, 100, 150, 200, 250, 300};
 int* lamps = new int[6];
 int pins[6] = {3, 5, 6, 9, 10, 11};
 
-void setup() {
+void setup() 
+{
   for (int i = 0; i < 6; ++i) 
   {
     micrs[i] = 0;
     lamps[i] = LOW;
     pinMode(pins[i], OUTPUT);
   }
-
-  times[0] = 10000;
-  times[1] = 20000;
-  times[2] = 300000;
-  times[3] = 400000;
-  times[4] = 500000;
-  times[5] = 600000;
 }
 
 void loop() 
@@ -100,5 +94,21 @@ void loop()
     }
 
     digitalWrite(pins[4], lamps[4]);
+  }
+
+  if (micr_cur - micrs[5] >= times[5]) 
+  {
+    micrs[5] = micr_cur;
+
+    if (lamps[5] == LOW) 
+    {
+      lamps[5] = HIGH;
+    }
+    else 
+    {
+      lamps[5] = LOW;
+    }
+
+    digitalWrite(pins[5], lamps[5]);
   }
 }
